@@ -1,0 +1,48 @@
+<html>
+
+<head>
+
+<script type="text/javascript">
+
+function updateTime()
+
+{
+
+var now = new Date();
+
+var hours = now.getHours();
+
+var minutes = now.getMinutes();
+
+var seconds = now.getSeconds();
+
+window.document.getElementById('time').innerHTML =
+
+hours + ":" +
+
+(minutes<10?"0" +minutes:minutes) + ":" +
+
+(seconds<10?"0" + seconds:seconds);
+
+}
+
+setInterval(updateTime, 1000);
+
+</script>
+
+</head>
+
+<body style="background-color:#1c1c1c;margin:0">
+
+<div style="border-top:1px solid #404040">
+
+<div id="time" style="color:#fff;;padding:10px">Welcome to Titanium</div>
+
+</div>
+
+</body>
+
+</html>
+
+
+Read more: http://www.brighthub.com/hubfolio/matthew-casperson/articles/52383.aspx#ixzz18r31LnNf

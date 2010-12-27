@@ -1,0 +1,53 @@
+var win = Ti.UI.currentWindow;
+
+var editproductname;
+
+var xhr = Ti.Network.createHTTPClient();
+ xhr.onload = function(e) {
+ 	products = eval('('+this.responseText+')');
+ 	editproductname = products.product.name
+		var label = Ti.UI.createLabel({
+								   	   color:'#999',
+    										text:'Update A Name',
+    										top:10,
+    										left:10,
+    										width:250,
+    										font:{fontSize:20,fontFamily:'Helvetica Neue'},
+    										textAlign:'center',
+    										width:'auto'
+									 });
+ 									 win.add(label);
+ 									 var tf1 = Titanium.UI.createTextField({
+    								 		color:'#336699',
+    								 		height: 35,
+    								 		top: 40,
+    								 		left: 10,
+    								 		width: 250,
+    								 		value: editproductname,
+    								 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+									 });
+									 win.add(tf1);
+								    var button = Titanium.UI.createButton({
+   								   	title: 'Update A Product',
+   									   top:80,
+						   			   left:10,
+    									   width:250
+									  });
+									 win.add(button);
+									 button.addEventListener('click',function(e)
+											{
+							 					var xhr = Ti.Network.createHTTPClient();
+    	  										xhr.open('PUT','http://192.168.0.16:3000/products/'+Titanium.UI.currentWindow.editproductid); 
+		 										xhr.send("product[name]="+tf1.value);
+		 										var childWindow = Titanium.UI.createWindow ({  
+        											title: "Product Index", // Set the title  
+        											backgroundColor: "#fff", // Set the background color to white  
+        											url: "openerp.js" // Link to file which will handle the code for the window  
+   										    }); 
+   								      Titanium.UI.currentTab.open(childWindow);		  								 
+   								  });	 			
+ }
+ xhr.open('GET','http://192.168.0.16:3000/products/'+Titanium.UI.currentWindow.editproductid+'/edit.json'); 
+		 						xhr.send();
+
+							
